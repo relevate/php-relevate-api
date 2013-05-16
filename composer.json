@@ -1,0 +1,22 @@
+{
+    "name": "relevate/relevate-api-consumer",
+    "type": "library",
+    "description": "Relevate API client",
+    "homepage": "http://relevate.dk",
+    "keywords": ["relevate", "product management", "pim"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Relevate ApS",
+            "homepage": "http://relevate.dk"
+        }
+    ],
+    "require": {
+        "php":                ">=5.3.2",
+        "ext-curl":           "*",
+        "kriswallsmith/buzz": ">=0.7"
+    },
+    "autoload": {
+        "psr-0": { "Relevate\\": "lib/" }
+    }
+}
