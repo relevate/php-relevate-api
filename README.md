@@ -74,7 +74,7 @@ $exports = $client->api('exports')->all();
 
 ### Do a single export
 
-*Note:* `Relevate\Api\Export::export(...)` returns a [Buzz](https://Relevate.com/kriswallsmith/Buzz) [Response](https://Relevate.com/kriswallsmith/Buzz/blob/master/lib/Buzz/Message/Response.php), so that you can retrieve the proper Content-type header from the response and pass that on to the client.
+*Note:* `Relevate\Api\Export::export(...)` returns a [Buzz](https://github.com/kriswallsmith/Buzz) [Response](https://github.com/kriswallsmith/Buzz/blob/master/lib/Buzz/Message/Response.php), so that you can retrieve the proper Content-type header from the response and pass that on to the client.
 
 ```php
 // Do a single export
