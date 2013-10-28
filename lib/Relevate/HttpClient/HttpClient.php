@@ -23,7 +23,7 @@ class HttpClient implements HttpClientInterface
      * @var array
      */
     protected $options = array(
-        'base_url'    => 'http://55.55.55.10/api_dev.php/',
+        'base_url'    => 'http://demo.relevate.dk/api/',
 
         'user_agent'  => 'relevate-api php client (http://relevate.dk)',
         'timeout'     => 10,
