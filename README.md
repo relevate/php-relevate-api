@@ -72,7 +72,7 @@ $products = $client->api('products')->search('olive oil');
 $exports = $client->api('exports')->all();
 ```
 
-### Do a single export
+### Do a single export without queueing
 
 *Note:* `Relevate\Api\Export::export(...)` returns a [Buzz](https://github.com/kriswallsmith/Buzz) [Response](https://github.com/kriswallsmith/Buzz/blob/master/lib/Buzz/Message/Response.php), so that you can retrieve the proper Content-type header from the response and pass that on to the client.
 
@@ -83,4 +83,37 @@ $export = $client->api('exports')->export(6, array(789, 890));
 // Pass the headers and content on to the client.
 header(sprintf('Content-type: %s', $export->getHeader('Content-type')));
 echo $export->getContent();
+```
+
+### Do a single export with queue
+
+```php
+// Create the exports API object
+$export_api = $client->api('exports');
+
+// Queue the export
+$export_id = 1;
+$export = $export_api->export($export_id, [1, 2, 3, 4], true);
+
+// Parse the export queue id
+preg_match('/\/([0-9]+)\.json/', $export->getHeader('Location'), $res);
+$queue_id = $res[1];
+
+// Wait until the export is done
+echo "Export queued...\n";
+$done = false;
+while(!$done) {
+    sleep(3);
+    echo "Running...\n";
+
+    // Retrieve the queue status
+    $export_queue = $export_api->queue_status($export_id, $queue_id);
+
+    // Check if it is done
+    $done = $export_queue['completion_percent'] == 100;
+}
+
+// Display the download URL
+$url = $export_queue['file_location'];
+echo sprintf("Export can be found at %s\n", $url);
 ```
