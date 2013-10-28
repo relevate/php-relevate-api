@@ -146,6 +146,7 @@ class HttpClient implements HttpClientInterface
         $request = $this->createRequest($httpMethod, $path);
         $request->addHeaders($headers);
         $request->setContent(json_encode($parameters));
+        $request->addHeader(sprintf('User-Agent: %s', $this->options['user_agent']));
 
         $hasListeners = 0 < count($this->listeners);
         if ($hasListeners) {
@@ -155,6 +156,8 @@ class HttpClient implements HttpClientInterface
         }
 
         $response = $this->createResponse();
+
+        $this->client->setMaxRedirects(0);
 
         try {
             $this->client->send($request, $response);
