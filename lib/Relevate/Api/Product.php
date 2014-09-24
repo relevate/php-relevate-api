@@ -12,7 +12,7 @@ class Product extends AbstractApi
      */
     public function all(array $params = array()) {
         $response = $this->get('products.json', $params, array(), false);
-        return new PagedList($response->getContent(), $response->getPagination());
+        return new PagedList($response->getContent()['elements'], $response->getPagination());
     }
 
     /**
